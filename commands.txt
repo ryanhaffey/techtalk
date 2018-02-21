@@ -1,23 +1,11 @@
-#pull latest version of nginx from docker hub
-docker pull nginx
+###Sample pulled from this here:http://containertutorials.com/linked/docker_compose.html
+
+#pull latest images of wordpress and mysql from docker hub
+docker-compose pull
+
+#run wordpress stack 
+docker-compose up
 
 #browse to this page
-http://localhost:5000/
+http://localhost:8080/
 
-#run nginx image, map host port to 5000
-docker run --name nginx_container -d -p 5000:80 nginx 
-
-#list current docker containers
-docker ps -a 
-
-#browse to this page
-http://localhost:5000/
-
-#get logs from the nginx  
-docker logs nginx_container -f
-
-#stop container 
-docker stop nginx_container
-
-#remove container
-docker rm nginx_container
