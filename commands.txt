@@ -1,8 +1,8 @@
-#Build new nginx image
-docker build -t nginx:techtalk . 
+#Build nginx using docker-compose
+docker-compose build
 
-#run nginx image, map host port to 5000
-docker run --name nginx_container -d -p 5000:80 nginx:techtalk
+#run nginx image using docker-compose
+docker-compose up
 
 #browse to this page
 http://localhost:5000/
