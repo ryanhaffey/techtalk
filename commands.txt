@@ -2,13 +2,18 @@
 docker-compose build
 
 #run nginx image using docker-compose
+#if prompted please allow docker to access your drive
 docker-compose up
 
 #browse to this page
 http://localhost:5000/
 
-#stop container 
-docker stop nginx_container
+#modify the index.html (located in your current directory)
+#Find <h1>Welcome to Tech Talk - Docker!</h1> (located between the <body> </body> tags)
+#Change the text between <h1> </h1> and save
 
-#remove container
-docker rm nginx_container
+#to see the changes refresh this page
+http://localhost:5000/ 
+
+#Stop and remove the container and network
+docker-compose down
