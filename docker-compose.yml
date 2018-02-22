@@ -3,9 +3,10 @@ services:
     web:
       image: wordpress
       links:
-        - mysql
+        - mysql:mysql1
       environment:
         - WORDPRESS_DB_PASSWORD=sample
+        - WORDPRESS_DB_HOST=mysql1
       ports:
         - "8080:80"
     mysql:

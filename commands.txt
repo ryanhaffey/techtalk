@@ -1,11 +1,44 @@
 ###Sample pulled from this here:http://containertutorials.com/linked/docker_compose.html
 
-#pull latest images of wordpress and mysql from docker hub
-docker-compose pull
+# pull latest images of wordpress and mysql from docker hub
+  docker-compose pull
 
-#run wordpress stack 
-docker-compose up
+# run wordpress stack 
+  docker-compose up
 
-#browse to this page
-http://localhost:8080/
+# browse to this page
+  http://localhost:8080/
 
+  # open up a new console window
+  # list the running containers
+    docker ps
+  
+  # list the docker networks 
+    docker network ls
+
+  # get details on the tech talk network 
+    docker network inspect techtalk_default
+  
+  # get information on the web container 
+    docker inspect techtalk_web_1
+  
+  # find the "Networks" section and read the Links 
+  # you will see a link that looks like this "<running container name>:<name specified in the docker-compose file>" 
+  
+  # The following commands will allow you to get the link information directly
+
+  # The first part of the link maps to the name of the container running the mysql image
+  # The output of this command:
+    docker ps --filter ancestor=mysql --format "{{ .Names }}"
+  # should match the output of this command:
+    docker inspect --format '{{index (split (index .NetworkSettings.Networks.techtalk_default.Links "0") \":\") "0" }}' $(docker ps --filter ancestor=wordpress --format "{{ .Names }}")
+   
+  # The second will match what was specfied in the links section in docker compose
+    docker inspect --format '{{index (split (index .NetworkSettings.Networks.techtalk_default.Links "0") \":\") "1" }} ' $(docker ps --filter ancestor=wordpress --format "{{ .Names }}")
+
+  # close the console 
+  
+# stop and remove the wordpress stack
+# in the original console 
+# type: ctrl + c
+  docker-compose down
